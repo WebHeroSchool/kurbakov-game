@@ -1,10 +1,11 @@
 html, body {
   height: 100%;
   width: 100%;
+  overflow: hidden; 
 }
 
 body {
-  background: url(../images/zone.png);
+  background: url(../images/zone.png) 50% 40%;
   background-size: cover;
   font-family: Montserrat, sans-serif;
   height: 100%;
@@ -15,7 +16,7 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  margin: 40px 50px 0;
+  margin: 20px 50px 0;
 }
 
 .header__info {
@@ -155,6 +156,8 @@ body {
   color: #27A8F3;
   font-weight: 800;
   text-transform: uppercase;
+  display: inline-flex;
+  margin-top: -2px;
 }
 
 .header__btn-text_fz20 {
@@ -163,4 +166,46 @@ body {
 
 .header__btn-text_fz30 {
   font-size: 30px;
+}
+
+.main {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.emoji {
+  cursor: pointer;
+  height: 120px;
+  width: 120px;
+}
+
+.hole-1 {
+  position: absolute;
+  left: 313px;
+  top: 57px;
+}
+
+.hole-2 {
+  position: absolute;
+  left: 630px;
+  top: 100px;
+}
+
+.hole-3 {
+  position: absolute;
+  left: 950px;
+  top: 30px;
+}
+
+.hole-4 {
+  position: absolute;
+  left: 460px;
+  top: 300px;
+}
+
+.hole-5 {
+  position: absolute;
+  left: 770px;
+  top: 305px;
 }

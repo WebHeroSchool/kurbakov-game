@@ -19,18 +19,18 @@
       <div class="header__right">
         <div class="header__score">
           <div class="header__points">
-            <span class="header__numbers">128</span>
+            <span id="score" class="header__numbers">0</span>
           </div>
         </div>
-        <div class="header__lives">
+        <div id="lives" class="header__lives">
           <div class="header__lives-item heart-red"></div>
           <div class="header__lives-item heart-red"></div>
-          <div class="header__lives-item heart-grey"></div>
+          <div class="header__lives-item heart-red"></div>
         </div>
       </div>
     </div>
     <div class="header__buttons">
-      <button class="header__btn-start">
+      <button id="start" class="header__btn-start">
          <span class="header__btn-text header__btn-text_fz20">Начать</span>
       </button>
       <button class="header__btn-question">
@@ -38,5 +38,11 @@
       </button>
     </div>
   </header>
+
+  <main id="main" class="main">
+    <div class="emoji"></div>
+  </main>
+
+  <script src="./js/main.js"></script>
 </body>
 </html>
