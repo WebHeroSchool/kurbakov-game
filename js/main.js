@@ -1,17 +1,17 @@
 // Data
 const data = {
   emoji: {
-    mouse: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/mouse-face_1f42d.png',
-    panda: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/panda-face_1f43c.png',
-    bear: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/bear-face_1f43b.png',
-    fox: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/fox-face_1f98a.png',
-    cat: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/cat-face_1f431.png',
-    cow: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/cow-face_1f42e.png',
-    lion: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/lion-face_1f981.png',
-    pig: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/pig-nose_1f43d.png',
-    koala: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/koala_1f428.png',
-    rabbit: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/rabbit-face_1f430.png',
-    tiger: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/155/tiger-face_1f42f.png',
+    mouse: 'mouse-face',
+    panda: 'panda-face',
+    bear: 'bear-face',
+    fox: 'fox-face',
+    cat: 'cat-face',
+    cow: 'cow-face',
+    lion: 'lion-face',
+    pig: 'pig-nose',
+    koala: 'koala-face',
+    rabbit: 'rabbit-face',
+    tiger: 'tiger-face',
   },
   holes: [ 'hole-1', 'hole-2', 'hole-3', 'hole-4', 'hole-5' ]
 };
@@ -31,33 +31,33 @@ class Game {
 		this.isMouse = isMouse;
     this.counter = 0;
 
+    this.checkLives = this.checkLives.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.createEl = this.createEl.bind(this);
     this.start = this.start.bind(this);
 	}
 
+  checkLives(hearts) {
+    if (hearts !== 3) {
+      lives.children[hearts].classList.remove('heart-red');
+      lives.children[hearts].classList.add('heart-grey');
+    } else {
+      const livesChildren = Array.prototype.slice.call(lives.children);
+      livesChildren.forEach(el => {
+        el.classList.remove('heart-grey');
+        el.classList.add('heart-red');
+      });
+    }
+  }
+
 	handleClick(rndEl, timerId) {
-		this.isMouse = (rndEl[0] === 'mouse') ? true : false;
+		this.isMouse = (rndEl[0] === 'mouse');
 
     if (this.isMouse) {
       this.score += 10;
       score.textContent = this.score;
     } else {
-      this.lives--;
-      switch(this.lives) {
-        case 2:
-          lives.children[2].classList.remove('heart-red');
-          lives.children[2].classList.add('heart-grey');
-        break;
-        case 1:
-          lives.children[1].classList.remove('heart-red');
-          lives.children[1].classList.add('heart-grey');
-        break;
-        case 0:
-          lives.children[0].classList.remove('heart-red');
-          lives.children[0].classList.add('heart-grey');
-        break;
-      }
+      this.checkLives(--this.lives);
     }
 
     main.innerHTML = null;
@@ -100,7 +100,7 @@ class Game {
     test.textContent = `${rndEl[0]} ${rndHole}`;
 		
     const img = document.createElement('img');
-    img.src = rndEl[rndEl.length - 1];
+    img.src = `./images/emoji/${rndEl[rndEl.length - 1]}.png`;
     img.classList.add('emoji', rndHole);
     main.appendChild(img);
 
@@ -114,6 +114,8 @@ class Game {
 	start() {
     this.score = 0;
     score.textContent = this.score;
+    this.lives = 3;
+    this.checkLives(this.lives);
     this.isRunning = true;
     this.createEl();
 	}
