@@ -18,7 +18,6 @@ const data = {
 
 // Elements
 const lives = document.getElementById('lives');
-const main = document.getElementById('main');
 const score = document.getElementById('score');
 const start = document.getElementById('start');
 
@@ -50,7 +49,8 @@ class Game {
     }
   }
 
-	handleClick(rndEl, timerId) {
+	handleClick(rndEl, img, hole, timerId) {
+    console.log(rndEl[0]);
 		this.isMouse = (rndEl[0] === 'mouse');
 
     if (this.isMouse) {
@@ -60,26 +60,20 @@ class Game {
       this.checkLives(--this.lives);
     }
 
-    main.innerHTML = null;
-
     if (!this.lives) {
       clearTimeout(timerId);
-      const test = document.createElement('div');
-      test.style.textAlign = 'center';
-      main.appendChild(test);
-      test.textContent = 'Game Over!!!';
       this.isRunning = false;
+      console.log('Game Over ;)');
     }
+
+    hole.removeChild(img);
 	}
 
 	createEl() {
     if (!this.isRunning) return;
 
-    main.innerHTML = null;
-
-    const test = document.createElement('div');
-    test.style.textAlign = 'center';
-    main.appendChild(test);
+    const holesEl = document.querySelectorAll('.hole');
+    holesEl.forEach(el => el.innerHTML = '');
     
     const emoji = Object.entries(data.emoji);
     const holes = data.holes;
@@ -96,19 +90,18 @@ class Game {
       this.counter = 0;
       rndEl = emoji[0];
     }
-
-    test.textContent = `${rndEl[0]} ${rndHole}`;
 		
     const img = document.createElement('img');
     img.src = `./images/emoji/${rndEl[rndEl.length - 1]}.png`;
-    img.classList.add('emoji', rndHole);
-    main.appendChild(img);
+    img.classList.add('emoji');
+    const hole = document.getElementsByClassName(rndHole)[0];
+    hole.appendChild(img);
 
     const timerId = setTimeout(() => {
         this.createEl();
     }, 2000);
 
-    img.addEventListener('click', () => this.handleClick(rndEl, timerId));
+    img.addEventListener('click', () => this.handleClick(rndEl, img, hole, timerId));
 	}
 
 	start() {

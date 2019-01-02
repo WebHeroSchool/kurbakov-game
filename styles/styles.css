@@ -5,7 +5,8 @@ html, body {
 }
 
 body {
-  background: url(../images/zone.png) 50% 40%;
+  background: url(../images/zone.png) 50% 50% no-repeat;
+  background-size: cover;
   font-family: Montserrat, sans-serif;
   height: 100%;
   margin: 0;
@@ -168,7 +169,7 @@ body {
 }
 
 .main {
-  height: 550px;
+  height: 450px;
   margin: 0 auto;
   position: relative;
   width: 950px;
@@ -178,42 +179,51 @@ body {
   cursor: pointer;
   height: 120px;
   width: 120px;
-  animation: emoji 1.5s;
+  animation: emoji 1.5s forwards;
+}
+
+.hole {
+  align-items: flex-end;
+  background: #AE8348;
+  border-radius: 50%;
+  box-shadow: inset 0px 9px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  height: 168px;
+  justify-content: center;
+  position: absolute;
+  width: 225px;
 }
 
 .hole-1 {
-  position: absolute;
-  left: 85px;
-  top: 90px;
+  left: 0;
+  top: 30px;
 }
 
 .hole-2 {
-  position: absolute;
-  left: 420px;
-  top: 140px;
+  left: 50%;
+  top: 100px;
+  transform: translateX(-50%);
 }
 
 .hole-3 {
-  position: absolute;
-  left: 755px;
-  top: 65px;
+  right: 0;
+  top: 0;
 }
 
 .hole-4 {
-  position: absolute;
-  left: 245px;
-  top: 350px;
+  bottom: 0;
+  left: 100px;
 }
 
 .hole-5 {
-  position: absolute;
-  left: 570px;
-  top: 355px;
+  bottom: 0;
+  right: 100px;
 }
 
 @keyframes emoji {
   0% {
     opacity: 0;
+    transform: translateY(20px);
   }
 
   50% {
@@ -222,5 +232,6 @@ body {
 
   100% {
     opacity: 1;
+    transform: translateY(-20px);
   }
 }
