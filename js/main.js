@@ -23,11 +23,12 @@ const start = document.getElementById('start');
 
 // Main class
 class Game {
-	constructor(score, lives, isRunning, isMouse) {
+	constructor(score, lives, isRunning, isMouse, time) {
 		this.score = score;
 		this.lives = lives;
 		this.isRunning = isRunning;
 		this.isMouse = isMouse;
+    this.time = time;
     this.counter = 0;
 
     this.checkLives = hearts => {
@@ -43,8 +44,7 @@ class Game {
       }
     };
 
-    this.handleClick = (rndEl, img, hole, timerId) => {
-      console.log(rndEl[0]);
+    this.handleClick = (rndEl, img, hole) => {
       this.isMouse = (rndEl[0] === 'mouse');
 
       if (this.isMouse) {
@@ -55,9 +55,8 @@ class Game {
       }
 
       if (!this.lives) {
-        clearTimeout(timerId);
+        clearTimeout(this.timerId);
         this.isRunning = false;
-        console.log('Game Over ;)');
       }
 
       hole.removeChild(img);
@@ -65,6 +64,8 @@ class Game {
 
     this.createEl = () => {
       if (!this.isRunning) return;
+
+      if (this.score === 50) this.time = 1111;
 
       const holesEl = document.querySelectorAll('.hole');
       holesEl.forEach(el => el.innerHTML = '');
@@ -91,24 +92,32 @@ class Game {
       const hole = document.getElementsByClassName(rndHole)[0];
       hole.appendChild(img);
 
-      const timerId = setTimeout(() => {
+      this.timerId = setTimeout(() => {
           this.createEl();
-      }, 2000);
+      }, this.time);
 
-      img.addEventListener('click', () => this.handleClick(rndEl, img, hole, timerId));
+      // const timerId = setTimeout(() => {
+      //     this.createEl();
+      // }, this.time);
+
+      img.addEventListener('click', () => this.handleClick(rndEl, img, hole));
     };
 
     this.start = () => {
+      if (this.timerId) {
+        clearTimeout(this.timerId);
+      }
       this.score = 0;
       scoreEl.textContent = this.score;
       this.lives = 3;
       this.checkLives(this.lives);
       this.isRunning = true;
+      this.time = 2000;
       this.createEl();
     };
 	}
 }
 
-const game = new Game(0, 3, false, false);
+const game = new Game(0, 3, false, false, 2000);
 
 start.addEventListener('click', game.start);

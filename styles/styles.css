@@ -1,7 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
-  width: 100%;
   overflow: hidden; 
+  width: 100%;
 }
 
 body {
@@ -179,7 +183,7 @@ body {
   cursor: pointer;
   height: 120px;
   width: 120px;
-  animation: emoji 1.5s forwards;
+  animation: emoji .8s forwards;
 }
 
 .hole {
@@ -235,3 +239,26 @@ body {
     transform: translateY(-20px);
   }
 }
+
+/*.rules {
+  background: #27A8F3;
+  border: 23px solid #FFF;
+  border-radius: 65px;
+  display: block;
+  height: 503px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 831px;
+}
+
+.rules__content {
+  
+}
+
+.rules__icon {
+  height: 20px;
+  margin-bottom: -5px;
+  width: 20px;
+}*/
