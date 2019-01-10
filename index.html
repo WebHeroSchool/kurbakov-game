@@ -33,7 +33,7 @@
       <button id="start" class="header__btn-start">
          <span class="header__btn-text header__btn-text_fz20">Начать</span>
       </button>
-      <button class="header__btn-question">
+      <button id="question" class="header__btn-question">
         <span class="header__btn-text header__btn-text_fz30">?</span>
       </button>
     </div>
@@ -47,22 +47,38 @@
     <div class="hole hole-5"></div>
   </main>
 
-  <!-- <div class="rules">
-    <div class="rules__content">
-      <p class="rules__text">
-        1. В одной из 5-ти норок в случайном порядке периодически появляется мышь
-          <img class="rules__icon" src="./images/emoji/mouse-face.png" alt="mouse">
-          и другие emoji
-          <img class="rules__icon" src="./images/emoji/mouse-face.png" alt="mouse">
-          <img class="rules__icon" src="./images/emoji/panda-face.png" alt="mouse">
-          <img class="rules__icon" src="./images/emoji/bear-face.png" alt="mouse">
-          <img class="rules__icon" src="./images/emoji/fox-face.png" alt="mouse">
-          <img class="rules__icon" src="./images/emoji/cat-face.png" alt="mouse">
-          <img class="rules__icon" src="./images/emoji/tiger-face.png" alt="mouse">
-          ...
-      </p>
+  <div id="rules" class="rules">
+    <div class="rules__wrapper">
+      <div class="rules__header">Правила игры</div>
+      <div class="rules__desc">
+        <div class="rules__content">
+          <p class="rules__text">
+            1.&nbsp;&nbsp;&nbsp;В одной из 5-ти норок в случайном порядке периодически появляется мышь
+              <img class="rules__icon" src="./images/emoji/mouse-face.png" alt="mouse">
+              и другие emoji
+              <img class="rules__icon" src="./images/emoji/mouse-face.png" alt="mouse">
+              <img class="rules__icon" src="./images/emoji/panda-face.png" alt="mouse">
+              <img class="rules__icon" src="./images/emoji/bear-face.png" alt="mouse">
+              <img class="rules__icon" src="./images/emoji/fox-face.png" alt="mouse">
+              <img class="rules__icon" src="./images/emoji/cat-face.png" alt="mouse">
+              <img class="rules__icon" src="./images/emoji/tiger-face.png" alt="mouse">
+              ...
+          </p>
+          <p class="rules__text">
+            2.&nbsp;&nbsp;&nbsp;Нужно поймать мышь. При клике по мыши игроку добавляется +10 очков.
+          </p>
+          <p class="rules__text">
+            3.&nbsp;&nbsp;&nbsp;После каждой пятой пойманной мыши скорость ее случайного появления увеличивается.
+          </p>
+          <p class="rules__text">
+            4.&nbsp;&nbsp;&nbsp; Если клик был выполнен по другом emoji, то у игрока отнимается жизнь. Всего 3 жизни. 
+            Если жизни закончились, то игра останавливается.
+          </p>
+        </div>
+      </div>
+      <button id="rules-ok" class="rules__btn">OK</button>
     </div>
-  </div> -->
+  </div>
 
   <script src="./js/main.js"></script>
 </body>

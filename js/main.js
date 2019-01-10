@@ -20,6 +20,18 @@ const data = {
 const livesEl = document.getElementById('lives');
 const scoreEl = document.getElementById('score');
 const start = document.getElementById('start');
+const question = document.getElementById('question');
+const rules = document.getElementById('rules');
+const rulesOk = document.getElementById('rules-ok');
+
+// Popup rules
+const showRules = () => {
+  rules.classList.add('active');
+};
+
+const hideRules = () => {
+  rules.classList.remove('active');
+};
 
 // Main class
 class Game {
@@ -96,10 +108,6 @@ class Game {
           this.createEl();
       }, this.time);
 
-      // const timerId = setTimeout(() => {
-      //     this.createEl();
-      // }, this.time);
-
       img.addEventListener('click', () => this.handleClick(rndEl, img, hole));
     };
 
@@ -115,9 +123,12 @@ class Game {
       this.time = 2000;
       this.createEl();
     };
+
 	}
 }
 
 const game = new Game(0, 3, false, false, 2000);
 
 start.addEventListener('click', game.start);
+question.addEventListener('click', showRules);
+rulesOk.addEventListener('click', hideRules);
