@@ -1,3 +1,16 @@
+// Elements
+const livesEl = document.getElementById('lives');
+const scoreEl = document.getElementById('score');
+const endScoreEl = document.getElementById('endScore');
+const start = document.getElementById('start');
+const speed = document.getElementById('speed');
+const star = document.getElementById('star');
+const question = document.getElementById('question');
+const rules = document.getElementById('rules');
+const rulesOk = document.getElementById('rules-ok');
+const end = document.getElementById('end');
+const endOk = document.getElementById('end-ok');
+
 // Data
 const data = {
   emoji: {
@@ -13,27 +26,27 @@ const data = {
     rabbit: 'rabbit-face',
     tiger: 'tiger-face',
   },
-  holes: [ 'hole-1', 'hole-2', 'hole-3', 'hole-4', 'hole-5' ]
+  holes: [ 'hole-1', 'hole-2', 'hole-3', 'hole-4', 'hole-5' ],
+  popups: [rules, end]
 };
 
-// Elements
-const livesEl = document.getElementById('lives');
-const scoreEl = document.getElementById('score');
-const start = document.getElementById('start');
-const speed = document.getElementById('speed');
-const star = document.getElementById('star');
-const question = document.getElementById('question');
-const rules = document.getElementById('rules');
-const rulesOk = document.getElementById('rules-ok');
+// Popups
+const hidePopup = elem => {
+  elem.classList.remove('active');
+}
 
-// Popup rules
-const showRules = () => {
-  rules.classList.add('active');
+const hideAllPopups = popups => {
+  popups.forEach(elem => hidePopup(elem));
+}
+
+const showPopup = elem => {
+  hideAllPopups(data.popups);
+  elem.classList.add('active');
+  if (elem === data.popups[1]) {
+    endScoreEl.textContent = scoreEl.textContent;
+  }
 };
 
-const hideRules = () => {
-  rules.classList.remove('active');
-};
 
 // Main class
 class Game {
@@ -85,6 +98,7 @@ class Game {
       if (!this.lives) {
         clearTimeout(this.timerId);
         this.isRunning = false;
+        showPopup(data.popups[1]);
       }
 
       hole.removeChild(img);
@@ -127,7 +141,7 @@ class Game {
       img.addEventListener('click', () => this.handleClick(rndEl, img, hole));
     };
 
-    this.start = () => {
+    this.reset = () => {
       if (this.timerId) {
         clearTimeout(this.timerId);
       }
@@ -135,10 +149,15 @@ class Game {
       scoreEl.textContent = this.score;
       this.lives = 3;
       this.checkLives(this.lives);
-      this.isRunning = true;
       this.time = 2000;
       this.mouseCounter = 0;
       this.counter = 0;
+    }
+
+    this.start = () => {
+      this.isRunning = true;
+      this.reset();
+      hideAllPopups(data.popups);
       this.createEl();
     };
 
@@ -148,5 +167,9 @@ class Game {
 const game = new Game(0, 3, false, false);
 
 start.addEventListener('click', game.start);
-question.addEventListener('click', showRules);
-rulesOk.addEventListener('click', hideRules);
+question.addEventListener('click', () => showPopup(data.popups[0]));
+rulesOk.addEventListener('click', () => hidePopup(data.popups[0]));
+endOk.addEventListener('click', () => {
+  hidePopup(data.popups[1]);
+  game.reset();
+});
