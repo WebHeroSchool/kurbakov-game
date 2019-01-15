@@ -152,12 +152,14 @@ class Game {
       this.time = 2000;
       this.mouseCounter = 0;
       this.counter = 0;
+      this.currentSpeed = 1;
+      speed.textContent = this.currentSpeed;
     }
 
     this.start = () => {
       this.isRunning = true;
-      this.reset();
       hideAllPopups(data.popups);
+      this.reset();
       this.createEl();
     };
 

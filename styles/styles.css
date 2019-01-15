@@ -251,7 +251,7 @@ body {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: all 1.234s;
+  transition: all 0.3s;
   width: 831px;
   z-index: 0;
 }
